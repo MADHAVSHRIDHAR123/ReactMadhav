@@ -16,10 +16,21 @@ const Counter = () => {
       setCount((prev) => prev - 1);
     }
   };
-
-  const styleCounter = {
+  const reset = () => {
+    
+      setCount(0);
+    
+  };
+  let styleCounter = {
     color: count > 5 ? "red" : "green",
   };
+if(count === 0){
+  styleCounter =  {
+    color: 'yellow',
+  };
+}
+ 
+
   // if ( count > 5 ) {
   //     color = 'red'
   // }else{
@@ -31,7 +42,7 @@ const Counter = () => {
       <h1 style={styleCounter}>Counter : {count}</h1>
       <button onClick={increament}>Increment</button>
       <button onClick={decrement}>Decrement</button>
-      {/* <button onClick={}></button> */}
+      <button onClick={reset}>reset</button>
     </div>
   );
 };
