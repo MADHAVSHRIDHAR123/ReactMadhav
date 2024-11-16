@@ -3,13 +3,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 // import Counter from "./useState";
 import reportWebVitals from "./reportWebVitals";
-import UseEffectComponent from "./useEffectPract";
+// import UseEffectComponent from "./useEffectPract";
+import Accordian from "./accordian";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <UseEffectComponent />
+    {/* <UseEffectComponent /> */}
+    <Accordian />
   </React.StrictMode>
 );
 
