@@ -54,7 +54,7 @@ useEffect(()=>{
                         <span>+</span>
                         </div>
                         <div>
-                            {enableMutiselection? (multiple.indexOf(dataiItem.id) !== -1 && (<div>{dataiItem.body}</div>)):
+                            {enableMutiselection? ( <div>{dataiItem.body}</div>):
                             (selected === dataiItem.id && (<div>{dataiItem.body}</div>))}
                             </div>
                         </div>     

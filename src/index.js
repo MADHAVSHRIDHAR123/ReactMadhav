@@ -4,14 +4,17 @@ import "./index.css";
 // import Counter from "./useState";
 import reportWebVitals from "./reportWebVitals";
 // import UseEffectComponent from "./useEffectPract";
-import Accordian from "./accordian";
+import Login from "./login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <UseEffectComponent /> */}
-    <Accordian />
+    <Login
+      title="Welcome Back!"
+      description="Log in to your account to continue."
+    />
   </React.StrictMode>
 );
 

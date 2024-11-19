@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 
 const styles = {
   container: {
@@ -23,6 +24,9 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "10px",
     color: "#333",
+  },
+  error:{
+    color: "red"
   },
   description: {
     fontSize: "16px",
@@ -53,11 +57,6 @@ const styles = {
   buttonHover: {
     backgroundColor: "#0056b3",
   },
-  error: {
-    color: "red",
-    fontSize: "14px",
-    marginTop: "10px",
-  },
   footer: {
     marginTop: "15px",
     fontSize: "14px",
@@ -70,43 +69,53 @@ const styles = {
 };
 
 const Login = ({ title, description }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+ const [email , setEmail ]  = useState("")
+ const [password, setPassword] = useState("")
+ const [error, setError] = useState("")
+ const [isLoading, setLoading] = useState(false)
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError(""); // Clear previous error
-    setIsLoading(true);
-
-    try {
-      const response = await fetch("https://dev.dhanxpert.com/API/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Login successful!"); // Replace this with navigation or further actions
-        console.log("User data:", data);
-      } else {
-        setError(data.message || "Login failed. Please try again.");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleMouseEnter = (e) => {
+    e.target.style.backgroundColor = styles.buttonHover.backgroundColor;
   };
 
+  const handleMouseLeave = (e) => {
+    e.target.style.backgroundColor = styles.button.backgroundColor;
+  };
+  const handleLogin = async  (e)=>{
+    e.preventDefault();
+    setLoading(true)
+    setError("")
+    try{
+    const response = await fetch('https://dev.dhanxpert.com/API/api/admin/login',{
+  method: "POST",
+  headers:{
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    email:email,
+    password:password
+  })
+
+})
+const data = await response.json()
+console.log(data,"reponsee")
+
+if(data.status){
+  alert("You are logged in")
+
+}else{
+  setError(data.message)
+}
+
+    } catch (error){
+    setError("Something went wrong")
+
+    } finally{
+      setLoading(false)
+
+    }
+  }
+console.log(email)
   return (
     <div style={styles.container}>
       <div style={styles.card}>
@@ -117,34 +126,33 @@ const Login = ({ title, description }) => {
             type="email"
             placeholder="Enter your email"
             style={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e)=> setEmail(e.target.value)}
             required
           />
           <input
             type="password"
             placeholder="Enter your password"
             style={styles.input}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e)=> setPassword(e.target.value)}
             required
           />
           <button
             type="submit"
             style={styles.button}
             disabled={isLoading}
-            onMouseEnter={(e) => (e.target.style.backgroundColor = styles.buttonHover.backgroundColor)}
-            onMouseLeave={(e) => (e.target.style.backgroundColor = styles.button.backgroundColor)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
-            {isLoading ? "Logging in..." : "Login"}
+            Login
           </button>
+          {isLoading? "please wait..." :"login"}
         </form>
         {error && <p style={styles.error}>{error}</p>}
         <p style={styles.footer}>
           Don't have an account?{" "}
-          <a href="#" style={styles.link}>
+          {/* <a href="#" style={styles.link}>
             Sign Up
-          </a>
+          </a> */}
         </p>
       </div>
     </div>
