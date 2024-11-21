@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import Dashboard from "./dashboard";
+import { useNavigate } from "react-router-dom"
 
 const styles = {
   container: {
@@ -73,6 +75,7 @@ const Login = ({ title, description }) => {
  const [password, setPassword] = useState("")
  const [error, setError] = useState("")
  const [isLoading, setLoading] = useState(false)
+ const navigate = useNavigate();
 
   const handleMouseEnter = (e) => {
     e.target.style.backgroundColor = styles.buttonHover.backgroundColor;
@@ -101,6 +104,11 @@ const data = await response.json()
 console.log(data,"reponsee")
 
 if(data.status){
+  localStorage.setItem("accessToken", data.accessToken );
+  localStorage.setItem("name", data.userData.fullName );
+// Retrieve
+  navigate("/dashboard")
+
   alert("You are logged in")
 
 }else{
@@ -117,6 +125,7 @@ if(data.status){
   }
 console.log(email)
   return (
+   
     <div style={styles.container}>
       <div style={styles.card}>
         <h3 style={styles.title}>{title}</h3>
