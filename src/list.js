@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import UserModal from "./UserModel";
+const UserList = ({ user }) => {
+  const [selected, setSelected] = useState(null);
+  const handleSlected = (user) => {
+    setSelected(user);
+  };
+  const handleClose = (user) => {
+    setSelected(null);
+  };
 
-const UserList = ({ users, onEdit, onDelete }) => {
   return (
     <div>
       <h2>User List</h2>
       <ul style={{ listStyleType: "none", padding: 0 }}>
-        {users.map((user) => (
+        {user?.map((userData) => (
           <li
-            key={user.id}
+            key={userData.id}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -18,10 +26,11 @@ const UserList = ({ users, onEdit, onDelete }) => {
               borderRadius: "5px",
             }}
           >
-            <span>{user.name}</span>
+            <span>{userData.firstName}</span>
+            <span>{userData.email}</span>
             <div>
               <button
-                onClick={() => onEdit(user.id)}
+                // onClick={() => onEdit(user.id)}
                 style={{
                   marginRight: "10px",
                   padding: "5px 10px",
@@ -34,7 +43,7 @@ const UserList = ({ users, onEdit, onDelete }) => {
                 Edit
               </button>
               <button
-                onClick={() => onDelete(user.id)}
+                onClick={() => handleSlected(userData)}
                 style={{
                   padding: "5px 10px",
                   backgroundColor: "#ff4d4d",
@@ -43,12 +52,13 @@ const UserList = ({ users, onEdit, onDelete }) => {
                   cursor: "pointer",
                 }}
               >
-                Delete
+                View
               </button>
             </div>
           </li>
         ))}
       </ul>
+      {selected && <UserModal user={selected} onClose={handleClose} />}
     </div>
   );
 };
