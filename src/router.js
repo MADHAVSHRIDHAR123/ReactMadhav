@@ -4,6 +4,7 @@ import Login from "./login";
 
 import Accordian from "./accordian";
 import Dashboard from "./dashboard";
+import AddUserModal from "./AdduserModal";
 const AppRouter = () => {
   return (
     <Routes>
@@ -18,6 +19,7 @@ const AppRouter = () => {
       />
       <Route path="/accordian" element={<Accordian />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/adduser" element={<AddUserModal />} />
     </Routes>
   );
 };

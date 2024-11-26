@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import UserModal from "./UserModel";
+import { useNavigate } from "react-router-dom";
+import AddUserModal from "./AdduserModal";
 const UserList = ({ user }) => {
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState(null);
   const handleSlected = (user) => {
     setSelected(user);
   };
   const handleClose = (user) => {
     setSelected(null);
+  };
+  const handleAdd = (user) => {
+    navigate("/adduser");
   };
 
   return (
@@ -30,7 +37,7 @@ const UserList = ({ user }) => {
             <span>{userData.email}</span>
             <div>
               <button
-                // onClick={() => onEdit(user.id)}
+                onClick={() => handleAdd()}
                 style={{
                   marginRight: "10px",
                   padding: "5px 10px",
@@ -40,7 +47,7 @@ const UserList = ({ user }) => {
                   cursor: "pointer",
                 }}
               >
-                Edit
+                Add
               </button>
               <button
                 onClick={() => handleSlected(userData)}
