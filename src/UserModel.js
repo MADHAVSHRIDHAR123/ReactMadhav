@@ -35,6 +35,7 @@ const UserModal = ({ user, onClose }) => {
       >
         <h2>User Details</h2>
         <ul>
+          <li>{/* <img src={user} alt="no"></img> */}</li>
           {Object.entries(user).map(([key, value]) => (
             <li>
               <strong>{key}:</strong>
